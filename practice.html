@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="main">
+        <h1 class="bank">welcome to National bank</h1>
+        <div id="submitArea">
+            <input class="form-control" type="text" placeholder="email">
+            <input class="form-control" type="password" placeholder="password">
+            <button id="loginArea" class="btn btn-primary" type="button">login</button>
+        </div>
+
+    </div>
+    <div id="transactionArea">
+        <div class="row">
+            <div class="col-md">
+                <div class="deposit status">
+                    <h5>deposit</h5>
+                    <h2>$ <span id="currentDeposit">00</span></h2>
+
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="withdraw status">
+                    <h5>withdraw</h5>
+                    <h2>$ <span id="withdrawBalance">00</span></h2>
+
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="balance status">
+                    <h5>Blance</h5>
+                    <h2>$ <span id="currentBalance">1240</span></h2>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div id="submitArea">
+                    <h4>deposit</h4>
+                    <input id="depositAmount" class="form-control" type="text"
+                        placeholder="$amount you want to deposit">
+                    <button id="addDeposit" class="btn btn-success" type="button">deposit</button>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div id="submitArea">
+                    <h4>Withdraw</h4>
+                    <input id="withdrawAmount" class="form-control" type="text"
+                        placeholder="$amount you want to withdraw">
+                    <button id="addWithdraw" class="btn btn-success" type="button">withdraw</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const logintBtn = document.getElementById('loginArea');
+        logintBtn.addEventListener('click', function () {
+            const mainArea = document.getElementById('main');
+            mainArea.style.display = "none";
+
+            const transaction = document.getElementById('transactionArea');
+            transaction.style.display = 'block';
+        })
+
+        // deposit balnce handeler
+
+        const depositBtn = document.getElementById('addDeposit');
+        depositBtn.addEventListener('click', function () {
+            const input = inputNum('depositAmount');
+
+            bankTrx('currentDeposit', input);
+            bankTrx('currentBalance', input);
+
+            // document.getElementById('currentDeposit').innerText = input;
+
+        })
+
+
+
+
+
+        const withdrawBtn = document.getElementById('addWithdraw');
+        withdrawBtn.addEventListener('click', function () {
+
+            const withdrawTOtal = inputNum('withdrawAmount');
+            bankTrx('withdrawBalance', withdrawTOtal);
+            bankTrx('currentBalance', -1 * withdrawTOtal);
+
+        })
+
+
+        
+
+
+        function inputNum(id) {
+            const withdraaw = document.getElementById(id).value;
+            const total = parseFloat(withdraaw);
+            return total;
+        }
+
+
+        function bankTrx(id, input) {
+            const amount = document.getElementById(id).innerText;
+            const totalAmount = parseFloat(amount);
+            const total = input + totalAmount;
+            document.getElementById(id).innerText = total;
+        }
+
+
+
+    </script>
+</body>
+
+</html>
